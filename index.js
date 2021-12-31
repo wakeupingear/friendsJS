@@ -149,6 +149,9 @@ class Indexer {
         if (word.includes("@")) {
             return "emails";
         }
+        if (!isNaN(word)) {
+            return "numbers";
+        }
         return "words";
     }
 
