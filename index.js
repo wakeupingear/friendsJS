@@ -16,7 +16,10 @@ class Indexer {
                 "data": {},
                 "index": {}
             };
-            fs.writeFile(filePath,JSON.stringify(this.obj.index));
+            fs.writeFile(filePath, JSON.stringify(this.obj), function (err) {
+                if (err) throw err;
+                console.log("New Index created");
+            });
         }
         else this.obj = JSON.parse(fs.readFileSync(filePath));
         this.result = new Set();
