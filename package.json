@@ -1,0 +1,24 @@
+{
+  "name": "friendzone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willf668/friendzone.git"
+  },
+  "keywords": [
+    "contacts",
+    "indexer",
+    "friends"
+  ],
+  "author": "Will Farhat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/willf668/friendzone/issues"
+  },
+  "homepage": "https://github.com/willf668/friendzone#readme"
+}
