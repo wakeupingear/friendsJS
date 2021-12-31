@@ -16,7 +16,7 @@ class Indexer {
                 "data": {},
                 "index": {}
             };
-            this.createFile(filePath, JSON.stringify(this.obj.index));
+            fs.writeFile(filePath,JSON.stringify(this.obj.index));
         }
         else this.obj = JSON.parse(fs.readFileSync(filePath));
         this.result = new Set();
@@ -138,12 +138,7 @@ class Indexer {
 
     //#region Helper Functions
 
-    //Create a file. Used when the index or data files don't exist.
-    createFile(path, value) {
-        fs.mkdirSync(path, { recursive: true });
-        fs.rmdirSync(path);
-        fs.writeFileSync(path, value);
-    }
+    //Check what category a word belongs to
     checkWordType(word) {
         if (word.charAt(0) == "@") {
             return "socials"
