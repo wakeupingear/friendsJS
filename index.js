@@ -1,3 +1,4 @@
+const { Console } = require('console');
 const fs = require('fs');
 const util = require('util');
 
@@ -73,6 +74,7 @@ class Indexer {
     //Add a new contact to the index and data.
     //@param {string} input - The name and any additional contact info to add. The input is processed as a space-separated string, with the first word(s) being the name.
     add(input) {
+        input = input.replace("  ", " ");
         const values = input.split(' ');
         if (values.length == 0) return;
         let key = "";
@@ -190,13 +192,13 @@ class Indexer {
 
     //Helper method for recursively searching through a subset of the index to find all matches.
     eachRecursive(obj, max) {
-        Object.keys(obj).forEach(k => {
+        for (let k of Object.keys(obj)) {
+            if (this.result.size >= max) break;
             if (typeof obj[k] == "object" && obj[k] !== null) this.eachRecursive(obj[k], max);
             else if (k != "nn") {
                 this.result.add(obj[k]);
-                if (this.result.size >= max) return;
             }
-        });
+        }
     }
     //#endregion
 }
