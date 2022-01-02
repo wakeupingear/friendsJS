@@ -1,10 +1,10 @@
-# Friendzone
+# FriendsJS
 ## A NodeJS class for storing and searching your contact information
-Friendzone constructs an indexexed database of contact information, such as email addresses and phone numbers. This enables real-time searching, either by a person's name or by their contact information.
+FriendsJS constructs an indexexed database of contact information, such as email addresses and phone numbers. This enables real-time searching, either by a person's name or by their contact information.
 ## Installation
-Friendzone can be installed with NPM:
+FriendsJS can be installed with NPM:
 ```
-npm install friendzone
+npm install friendsJS
 ```
 
 ## Usage

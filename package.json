@@ -1,6 +1,6 @@
 {
-  "name": "friendzone",
-  "version": "1.0.4",
+  "name": "friendsJS",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/willf668/friendzone.git"
+    "url": "git+https://github.com/willf668/friendsJS.git"
   },
   "keywords": [
     "contacts",
@@ -18,7 +18,7 @@
   "author": "Will Farhat",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/willf668/friendzone/issues"
+    "url": "https://github.com/willf668/friendsJS/issues"
   },
-  "homepage": "https://github.com/willf668/friendzone#readme"
+  "homepage": "https://github.com/willf668/friendsJS#readme"
 }
