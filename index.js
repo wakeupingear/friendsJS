@@ -79,10 +79,9 @@ class Indexer {
         if (values.length == 0) return;
         let key = "";
         let keyIsDone = false;
-        let index = 0;
         let val = null;
         const valuesToIndex = [];
-        while (index < values.length) {
+        for (let index = 0; index < values.length; index++) {
             if (values[index] === "") continue;
             let type = this.checkWordType(values[index]);
             if (type == "words" && !keyIsDone) {
@@ -96,6 +95,7 @@ class Indexer {
                     else val = {};
                 }
                 keyIsDone = true;
+                if (type == "space") continue;
                 valuesToIndex.push(values[index]);
                 if (!(type in val)) val[type] = [values[index]];
                 else if (!val[type].includes(values[index])) {
@@ -103,7 +103,6 @@ class Indexer {
                 }
                 else valuesToIndex.pop();
             }
-            index++;
         }
         valuesToIndex.forEach(value => {
             this.obj.index = this.addToIndex(value, key, this.obj.index, 0);
@@ -145,8 +144,11 @@ class Indexer {
 
     //Check what category a word belongs to
     checkWordType(word) {
+        if (word == "/") {
+            return "space";
+        }
         if (word.charAt(0) == "@") {
-            return "socials"
+            return "socials";
         }
         if (word.includes("@")) {
             return "emails";
