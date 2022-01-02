@@ -9,7 +9,8 @@ class Indexer {
     //Indexer Constructor
     //@param {string} filePath - Path to the .json file that stores the data and index.
     //@param {int} maxQueries - The maximum number of results to return for a search.
-    constructor(filePath, maxQueries = 10) {
+    //@param {boolean} caseSensitive - Whether capitalization matters in searches.
+    constructor(filePath, maxQueries = 10, caseSensitive = false) {
         this.filePath = filePath;
         if (!fs.existsSync(filePath)) {
             this.obj = {
@@ -25,6 +26,7 @@ class Indexer {
         else this.obj = JSON.parse(fs.readFileSync(filePath));
         this.result = new Set();
         this.maxQueries = maxQueries;
+        this.caseSensitive = caseSensitive;
     }
 
     //Save the index and data to their respective files
@@ -40,7 +42,7 @@ class Indexer {
     }
 
     //Print an expanded version of the data to the console
-    printIndex() {
+    printData() {
         console.log(util.inspect(this.obj.data, { showHidden: false, depth: null, colors: true, compact: true }))
     }
 
@@ -50,6 +52,7 @@ class Indexer {
     //@param {string} query - The query to search for.
     //@param {int} max - The maximum number of results to return. Defaults to the maxQueries property.
     search(query, max) {
+        if (!this.caseSensitive) query = query.toLowerCase();
         if (max == undefined) max = this.maxQueries;
         if (query === "") return [];
         if (query.length > this.obj.data.maxLength) return [];
@@ -105,14 +108,18 @@ class Indexer {
             }
         }
         valuesToIndex.forEach(value => {
+            if (!this.caseSensitive) value = value.toLowerCase();
             this.obj.index = this.addToIndex(value, key, this.obj.index, 0);
         });
         if (!(key in this.obj.data)) {
             if (key.length > this.obj.data.maxLength) this.obj.data.maxLength = key.length;
             const splitKey = key.split(' ');
-            for (let i = 1; i < splitKey.length; i++)
+            for (let i = 1; i < splitKey.length; i++) {
+                if (!this.caseSensitive) splitKey[i] = splitKey[i].toLowerCase();
                 this.obj.index = this.addToIndex(splitKey[i], key, this.obj.index, 0);
-            this.obj.index = this.addToIndex(key, key, this.obj.index, 0);
+            }
+            if (!this.caseSensitive) this.obj.index = this.addToIndex(key.toLowerCase(), key, this.obj.index, 0);
+            else this.obj.index = this.addToIndex(key, key, this.obj.index, 0);
         }
         this.obj.data[key] = val;
     }
@@ -120,6 +127,7 @@ class Indexer {
     //Remove a query from the index and data.
     //@param {string} query - The query to search for and remove.
     remove(query) {
+        if (!this.caseSensitive) query = query.toLowerCase();
         const searchArray = this.search(query, 1);
         if (searchArray.length == 0) return;
         const obj = searchArray[0];
