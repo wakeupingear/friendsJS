@@ -4,7 +4,7 @@ FriendsJS constructs an indexexed database of contact information, such as email
 ## Installation
 FriendsJS can be installed with NPM:
 ```
-npm install friendsJS
+npm install friends-js
 ```
 
 ## Usage
