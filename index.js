@@ -1,4 +1,3 @@
-const { Console } = require('console');
 const fs = require('fs');
 const util = require('util');
 
@@ -164,6 +163,9 @@ class Indexer {
         }
         if (!isNaN(word)) {
             return "numbers";
+        }
+        if (word.charAt(0) == "$") {
+            return "urls";
         }
         return "words";
     }
