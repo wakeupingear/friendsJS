@@ -76,7 +76,8 @@ class Indexer {
 
     //Add a new contact to the index and data.
     //@param {string} input - The name and any additional contact info to add. The input is processed as a space-separated string, with the first word(s) being the name.
-    add(input) {
+    //@param {indexValues} indexValues - Whether to add the values to the index. Defaults to true.
+    add(input, indexValues=true) {
         input = input.replace("  ", " ");
         const values = input.split(' ');
         if (values.length == 0) return;
@@ -107,7 +108,7 @@ class Indexer {
                 else valuesToIndex.pop();
             }
         }
-        valuesToIndex.forEach(value => {
+        if (indexValues) valuesToIndex.forEach(value => {
             if (!this.caseSensitive) value = value.toLowerCase();
             this.obj.index = this.addToIndex(value, key, this.obj.index, 0);
         });

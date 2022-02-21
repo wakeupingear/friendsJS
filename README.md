@@ -9,7 +9,7 @@ npm install friends-js
 
 ## Usage
 ```js
-const Indexer = require('./indexer.js');
+const Indexer = require("friends-js");
 
 const myContacts = new Indexer("./contactInfo.json");
 
